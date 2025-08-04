@@ -53,7 +53,12 @@ export default function ArgoLoginPage() {
       } else {
         setError("Invalid username or password");
       }
-    } catch (err) {
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
       setError("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -109,7 +114,7 @@ export default function ArgoLoginPage() {
           <div className="text-center lg:text-left space-y-6 sm:space-y-8">
             <div className="space-y-4 sm:space-y-6">
               <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-                Let's get stuff{" "}
+                Let&apos;s get stuff{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400">
                   deployed!
                 </span>
